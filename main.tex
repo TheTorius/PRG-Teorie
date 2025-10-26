@@ -122,8 +122,39 @@ Správné řešení:
 
 \section{Datové typy a operátory jazyka C}
 \subsection{Datové typy}
-Programovací jazyk C rozpoznává několik datových typů, které nám určují typ proměnné. Mezi základní rozpoznáváme jako \textbf{prázdné, celočíselné, s plovoucí čárkou a znakové}. 
+Programovací jazyk C rozpoznává několik datových typů, které nám určují typ proměnné. Mezi základní rozpoznáváme jako \textbf{neurčitý, celočíselné, reálné a znakové}. 
 
+Příklady jednotlivých datových typů:
+\begin{itemize}
+    \item Neurčité:
+    \begin{itemize}
+        \item void
+    \end{itemize}
+    \item Celočíselné:
+    \begin{itemize}
+        \item char (8 bitů), short(16 bitů/WORD), long (64bitů), int (32bitů)
+    \end{itemize}
+    \item Reálné:
+    \begin{itemize}
+        \item float (32bitů), double(64bitů), long double(80 bitů)
+    \end{itemize}
+\end{itemize}
+
+Rozpoznáváme kromě samotného typu taktéž i to, jestli je znaménkový nebo neznaménkový. To znamená, že rozlišujeme, zda-li číslo může být i záporné nebo jen kladné. Všechny datové typy, pokud neurčíme jinak, mají v základě nastavený datový typ znaménkový. Pokud chceme specifikovat, že se má jednat o neznaménkový, pak před typ musíme napsat klíčové slovo \textbf{unsigned}.
+
+Příklad celočíselné proměnné \textbf{int} a \textbf{unsigned int}:
+\begin{itemize}
+    \item Oba tyto datové typy mají 32 bitů.
+    \item První z nich má kladnou a zápornou část. Druhý jen kladnou.
+    \item Datový typ \textbf{int} má interval čísel:
+    \begin{equation}
+        int \in \hspace{6px} <-2147483648;2147483647>  
+    \end{equation}
+    \item Datový typ \textbf{unsigned int} má interval čísel:
+    \begin{equation}
+        unsigned\_int \in \hspace{6px} <0;4294967295>
+    \end{equation}
+\end{itemize}
 
 Zajímavostí programovacího jazyka C je ta, že rozdíl mezi znakem a celým číslem v jazyce rozdíl téměř není. Tam, kde se dá použít datový typ \textbf{integer} se dá taktéž použít i datový typ \textbf{char}. Zde je příklad při použití u větvení programovacího jazyka C pomocí switche.
 
@@ -134,7 +165,7 @@ V prvním příkladě můžeme vidět switch použitý s celočíselnou podmínk
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{ASCII.png}
+    \includegraphics[width=0.7\linewidth]{ASCII.png}
     \caption{ASCII tabulka znaků}
     \label{fig:asciiTable}
 \end{figure}
@@ -142,7 +173,49 @@ V prvním příkladě můžeme vidět switch použitý s celočíselnou podmínk
 Pokud si například deklarujeme číslo se stejnou hodnotou, jako je tomu v ASCII tabulce, pak při výpisu pomocí printf jsme schopni vypsat toto celé číslo jako znak a opravdu bude odpovídat tomu stejnému znaku, jako bychom chtěli použít u typu char.
 
 \subsection{Operátory}
-Rozpoznáváme také několik typů 
+Rozpoznáváme také několik typů operátorů jako jsou bitové, porovnávací (relační), inkrementační, dekrementační, aritmetické.
+
+Příklady jednotlivých operátorů:
+\begin{itemize}
+    \item Bitové
+    \begin{itemize}
+        \item << >> bitový posun
+        \item \& AND
+        \item | OR
+        \item \texttt{\^{}} XOR
+        \item \textasciitilde Negace
+    \end{itemize}
+    \item Přiřazení
+    \begin{itemize}
+        \item += -= *= /=
+        \item =
+    \end{itemize}
+    \item Relační a logické operátory
+    \begin{itemize}
+        \item < > >= <= == Relační operátory
+        \item \&\& || ! Logické operátory
+    \end{itemize}
+    \item Inkrementace a dekrementace
+    \begin{itemize}
+        \item ++ 
+        \item --
+    \end{itemize}
+    \item Aritmetické
+    \begin{itemize}
+        \item Unární operátory
+        \begin{itemize}
+            \item + - * / \% (modulo/zbytek po dělení)
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\textbf{Poznámka \#1:} U inkrementace a dekrementace záleží na pořadí. Tedy jestli máme například proměnnou \textbf{x} a ta má operátor x++ nebo ++x. Standardně v kódu to změnu neudělá, avšak například u výpisu ano. Příklad:
+
+\lstinputlisting[language=C]{incDec.c}
+
+Na výstupu výše zmíněného kódu bude výpis u proměnné \textbf{a} roven \textbf{0}, jelikož nejdříve to vypíše obsah dané proměnné a až následně proměnnou inkrementuje. Naopak je tomu u příkladu s proměnnou \textbf{b}, kde se nejdříve proměnná inkrementuje a až následně vypíše. Výstupem tedy bude hodnota rovna \textbf{1}.
+
+\textbf{Poznámka \#2:} U modula se dá dělit pouze dvě celočíselné hodnoty, nemůžeme použít na čísla s plovoucí desetinnou čárkou nebo jakékoliv reálné číslo.
 
 \section{Opakování bran}
 
