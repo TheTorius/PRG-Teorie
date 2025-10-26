@@ -86,6 +86,7 @@
 
 \tableofcontents
 \listoffigures
+\listoftables
 
 \newpage
 
@@ -217,9 +218,40 @@ Na výstupu výše zmíněného kódu bude výpis u proměnné \textbf{a} roven 
 
 \textbf{Poznámka \#2:} U modula se dá dělit pouze dvě celočíselné hodnoty, nemůžeme použít na čísla s plovoucí desetinnou čárkou nebo jakékoliv reálné číslo.
 
-\section{Opakování bran}
+\section{Logické brány}
+Tato část pojednává o branách, které bychom již měli znát z číslicové techniky a vyzkoušíme si je uvést na příkladech z programovacího jazyka C/C++. V Tabulce uvedené níže můžeme vidět příklad takových bran na dvou proměnných \textbf{a} a \textbf{b}. Konkrétně si zde budeme rozebírat pouze ty brány, které používáme i základně v programovacím jazyce C/C++.
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c||c|c|c|c|c|}
+      \rowcolor{yellow}\hline  a & b & a | b & a \& b & a \texttt{\^{}} b & \textasciitilde a & \textasciitilde b\\
+        \hline 0 & 0 & 0 &  0& 0 &  1&1 \\
+         \hline 0 & 1 & 1 &  0& 1 & 1 &0 \\
+         \hline 1&  0&  1&  0&  1& 0 & 1\\
+         \hline 1&  1&  1& 1 &  0& 0 & 0\\ \hline
+    \end{tabular}
+    \caption{Příklady logických bran}
+    \label{tab:logicGates}
+\end{table}
+
+Uveďme si příklad výsledku dvou proměnných, nad kterými provedeme jednotlivé bitové operace a jaké budou jejich výsledky:
+
+\lstinputlisting[language=C]{logicGates.c}
+
+Výstup z tohoto programu je následující:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{logicGatesOutput.png}
+    \caption{Výstup programu pro logické brány}
+    \label{fig:placeholder}
+\end{figure}
+
+Je nutné nezapomínat na to, že pokud budeme používat bitové operace například v podmínce nějaké smyčky nebo v podmíněném větvení typu if nebo switch, je potřeba si uvědomit, že podmínka je vždycky \textbf{pravdivá} pokud je číslo nenulové. Pokud je hodnota rovna nule, pak je podmínka vyhodnocena jako \textbf{nepravdivá}.
 
 \section{Obecná terminologie programování}
+\subsection{Proměnné}
 \subsection{Funkce}
 
 
