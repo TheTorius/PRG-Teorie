@@ -56,12 +56,12 @@
 
 \makeatletter         
 \def\@maketitle{\begin{center}
-\includegraphics[width = 160mm]{logo.png}\\[8ex]
+\includegraphics[width = 160mm]{images/logo.png}\\[8ex]
 {\Huge \@title  }\\[4ex] 
 {\Large  \@author}\\[4ex] 
 {\Large rev. 1.0}\\[4ex]
 \@date\\[20ex]
-\includegraphics[width = 70mm]{c_logo.png}\\[25ex]
+\includegraphics[width = 70mm]{images/c_logo.png}\\[25ex]
 \end{center}}
 \makeatother
 
@@ -96,7 +96,7 @@ Jedna z nejzákladnějších znalostí každého programátora by měla být zna
 \subsection{Fáze překladu}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{compilation.png}
+    \includegraphics[width=0.95\linewidth]{images/compilation.png}
     \caption{Proces kompilace jazyka C}
     \label{fig:compilationOfC}
 \end{figure}
@@ -114,12 +114,12 @@ Za důležitou zmínku stojí taktéž i to, že kompilace programovacího jazyk
 
 Pokud tedy program narazí během tohoto průchodu například na volanou funkci, kterou však během svého průchodu nezastihl, je vyvolána chyba o volání neexistující funkce ačkoliv se funkce ve zdrojovém kódu nachází, ale později, v takovém případě musíme před příkaz volající danou funkci vložit předpis dané funkce, nebo celou funkci včetně implementace. Příklad uveden níže.
 
-\lstinputlisting[language=C]{comp0.c}
+\lstinputlisting[language=C]{codes/comp0.c}
 
 Chybová hláška: [Warning]  implicit declaration of function 'soucet' [-Wimplicit-function-declaration]
 
 Správné řešení:
-\lstinputlisting[language=C]{comp1.c}
+\lstinputlisting[language=C]{codes/comp1.c}
 
 \section{Datové typy a operátory jazyka C}
 \subsection{Datové typy}
@@ -159,14 +159,14 @@ Příklad celočíselné proměnné \textbf{int} a \textbf{unsigned int}:
 
 Zajímavostí programovacího jazyka C je ta, že rozdíl mezi znakem a celým číslem v jazyce rozdíl téměř není. Tam, kde se dá použít datový typ \textbf{integer} se dá taktéž použít i datový typ \textbf{char}. Zde je příklad při použití u větvení programovacího jazyka C pomocí switche.
 
-\lstinputlisting[language=C]{switch0.c}
-\lstinputlisting[language=C]{switch1.c}
+\lstinputlisting[language=C]{codes/switch0.c}
+\lstinputlisting[language=C]{codes/switch1.c}
 
 V prvním příkladě můžeme vidět switch použitý s celočíselnou podmínkou. Naopak u druhého příkladu můžeme vidět použití se znaky, jenže u těchto znaků taktéž vidíme, že používáme čísla. Tato čísla pocházejí z ASCII tabulky znaků.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{ASCII.png}
+    \includegraphics[width=0.7\linewidth]{images/ASCII.png}
     \caption{ASCII tabulka znaků}
     \label{fig:asciiTable}
 \end{figure}
@@ -212,7 +212,7 @@ Příklady jednotlivých operátorů:
 
 \textbf{Poznámka \#1:} U inkrementace a dekrementace záleží na pořadí. Tedy jestli máme například proměnnou \textbf{x} a ta má operátor x++ nebo ++x. Standardně v kódu to změnu neudělá, avšak například u výpisu ano. Příklad:
 
-\lstinputlisting[language=C]{incDec.c}
+\lstinputlisting[language=C]{codes/incDec.c}
 
 Na výstupu výše zmíněného kódu bude výpis u proměnné \textbf{a} roven \textbf{0}, jelikož nejdříve to vypíše obsah dané proměnné a až následně proměnnou inkrementuje. Naopak je tomu u příkladu s proměnnou \textbf{b}, kde se nejdříve proměnná inkrementuje a až následně vypíše. Výstupem tedy bude hodnota rovna \textbf{1}.
 
@@ -237,13 +237,13 @@ Tato část pojednává o branách, které bychom již měli znát z číslicov�
 
 Uveďme si příklad výsledku dvou proměnných, nad kterými provedeme jednotlivé bitové operace a jaké budou jejich výsledky:
 
-\lstinputlisting[language=C]{logicGates.c}
+\lstinputlisting[language=C]{codes/logicGates.c}
 
 Výstup z tohoto programu je následující:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{logicGatesOutput.png}
+    \includegraphics[width=0.4\linewidth]{images/logicGatesOutput.png}
     \caption{Výstup programu pro logické brány}
     \label{fig:placeholder}
 \end{figure}
