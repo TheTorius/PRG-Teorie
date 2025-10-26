@@ -1,0 +1,160 @@
+\documentclass[twoside,a4paper]{article} %Produces two pages (based on A4 paper size)
+\usepackage{graphicx} % Required for inserting images
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{hyperref}
+\usepackage{xparse,nameref}
+\usepackage{geometry}
+\usepackage[autostyle=true,czech=quotes]{csquotes}
+\usepackage{fancyhdr}
+\usepackage[backend=biber, style=iso-numeric, alldates=iso,  sorting=nty]{biblatex} % bibliografie
+
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{algorithm2e}
+
+ \lstset{
+    language=C++,                    % Jazyk (C++)
+    basicstyle=\ttfamily\footnotesize,% Základní styl písma (monospace)
+    keywordstyle=\bfseries\color{blue},   % Klíčová slova (tučné a modré)
+    stringstyle=\color{orange},       % Řetězce (oranžové)
+    commentstyle=\itshape\color{green!50!black}, % Komentáře (kurzíva a tmavě zelené)
+    numbers=left,                     % Číslování řádků vlevo
+    numberstyle=\tiny\color{gray},    % Styl čísel řádků
+    stepnumber=1,                     % Každý řádek bude očíslován
+    numbersep=10pt,                   % Vzdálenost čísel od kódu
+    backgroundcolor=\color{gray!10},  % Pozadí kódu (světle šedé)
+    showspaces=false,                 % Nezobrazovat mezery
+    showstringspaces=false,           % Nezobrazovat mezery v řetězcích
+    tabsize=4,                        % Tabulátor = 4 mezery
+    captionpos=b,                     % Popisek pod kódem
+    breaklines=true,                  % Dlouhé řádky se budou zalamovat
+    breakatwhitespace=true,           % Zalamování při mezeře
+    frame=single,                     % Rámeček kolem kódu
+    rulecolor=\color{black},          % Barva rámečku
+    escapeinside={\%*}{*},            % Pro LaTeXové příkazy v kódu
+    morekeywords={nullptr, uint32_t, uint64_t} % Další klíčová slova
+}
+
+
+ \geometry{
+ a4paper,
+ %total={170mm,257mm},
+ %width = 170mm,
+ left=20mm,
+ top=30mm,
+ bottom=35mm,
+ right=30mm
+ }
+
+\title{Teorie programování \\ \large Určeno pro 4. ročník oboru Informatika a Řídící systémy
+}
+\author{Bc. Lukáš Horák}
+\date{\today}
+
+\makeatletter         
+\def\@maketitle{\begin{center}
+\includegraphics[width = 160mm]{logo.png}\\[8ex]
+{\Huge \@title  }\\[4ex] 
+{\Large  \@author}\\[4ex] 
+{\Large rev. 1.0}\\[4ex]
+\@date\\[20ex]
+\includegraphics[width = 70mm]{c_logo.png}\\[25ex]
+\end{center}}
+\makeatother
+
+\fancyhead{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhf[EHL]{PRG - Teorie}
+\fancyhf[EFL]{\thepage}
+\fancyhf[EFR]{Bc. Lukáš Horák}
+\fancyhf[OFL]{Bc. Lukáš Horák}
+\fancyhf[OFR]{\thepage}
+\fancyhf[OHR]{PRG - Teorie}
+\renewcommand{\headrulewidth}{0pt}
+\thispagestyle{empty}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\listoffigures
+
+\newpage
+
+\section{Kompilace jazyka C a C++}
+Jedna z nejzákladnějších znalostí každého programátora by měla být znalost procesu kompilace programovacího jazyka, který využívá. Na následujícím obrázku lze vidět proces kompilace programovacího jazyka C a C++ a následně si taktéž i rozebereme podrobně, z čeho se jednotlivé části kompilace skládají.
+
+\subsection{Fáze překladu}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{compilation.png}
+    \caption{Proces kompilace jazyka C}
+    \label{fig:compilationOfC}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{IDE} - IDE je vývojové prostředí, ve kterém programátor zapisuje zdrojový kód. Zdrojové kódy obsahují veškerou abstrakci i implementaci algoritmů sloužící pro správný chod programu. Výstupem z vývojového prostředí jsou soubory s příponami .c/.cpp/.h/.hpp a další.
+    \item \textbf{Preprocesor} - Fáze preprocesoru nám slouží pro předzpracování již napsaného kódu a připravení jej pro následnou kompilaci. Preprocesor zkontroluje direktivy (tedy \#define, \#ifndef...) a nahrazuje je za funkční kód, popřípadě například podmíněných překladů (jako je \#ifdef) zkontroluje, zda-li je podmínka splněna, pokud podmínka splněná není, pak tuto danou část kódu preprocesor ze zdrojového kódu pro kompilátor odstraní. Výstupem jsou soubory s příponou .i
+    \item \textbf{Kompilátor + Assembler} - Je část překladu, kdy se lidsky čitelný kód programovacího jazyka C a C++ převádí do formy assemblerovského kódu (jazyka strojových instrukcí), tento kód se převádí na kód strojový, který už není lidsky čitelný a je pro procesor čitelným. Každý soubor zdrojového kódu se převádí na samostatný objekt, což je také výstupem kompilátoru (soubory s příponou .o) a tyto soubory následně putují do linkeru.
+    \item \textbf{Linker} - Linker je závěrečnou fází překladu a propojuje jednotlivé objekty do jednoho výsledného programu, popřípadě propojuje taktéž i více programu k sobě, pro jejich vzájemnou komunikaci. Soubory nalinkované přes linker mohou být buď statické nebo dynamické. Statické se ke zdrojovému kódu připojují hned během fáze překladu. Dynamické mají pouze odkaz a musejí se vyskytovat v systému během spouštění výsledného programu. Výhodou může být možná upravitelnost těchto dynamicky nalinkovaných knihoven, avšak nese to i riziko tzv. injectování kódu, tedy hrozbě, kdy útočník může nahradit kód dynamicky linkované knihovny za kód škodlivý, který je následně spuštěn s programem. Výsledkem linkeru je .exe soubor, který nazýváme taktéž jako binárka. Je to již spustitelný přeložený program.
+\end{itemize}
+
+
+\subsection{Jednoprůchodový překladač}
+Za důležitou zmínku stojí taktéž i to, že kompilace programovacího jazyka C využívá jednoprůchodového překladače. To znamená že se program kompiluje takzvaně shora-dolů jedním průchodem. Kompilátor během tohoto jednoho průchodu ověřuje existenci veškerých proměnných a funkcí, které jsou během programu vyvolávány nebo používány. V případě zjištění chyby je kompilace přerušena a uživateli se zobrazí chybová hláška z fáze překladu odkazující na danou chybu. 
+
+Pokud tedy program narazí během tohoto průchodu například na volanou funkci, kterou však během svého průchodu nezastihl, je vyvolána chyba o volání neexistující funkce ačkoliv se funkce ve zdrojovém kódu nachází, ale později, v takovém případě musíme před příkaz volající danou funkci vložit předpis dané funkce, nebo celou funkci včetně implementace. Příklad uveden níže.
+
+\lstinputlisting[language=C]{comp0.c}
+
+Chybová hláška: [Warning]  implicit declaration of function 'soucet' [-Wimplicit-function-declaration]
+
+Správné řešení:
+\lstinputlisting[language=C]{comp1.c}
+
+\section{Datové typy a operátory jazyka C}
+\subsection{Datové typy}
+Programovací jazyk C rozpoznává několik datových typů, které nám určují typ proměnné. Mezi základní rozpoznáváme jako \textbf{prázdné, celočíselné, s plovoucí čárkou a znakové}. 
+
+
+Zajímavostí programovacího jazyka C je ta, že rozdíl mezi znakem a celým číslem v jazyce rozdíl téměř není. Tam, kde se dá použít datový typ \textbf{integer} se dá taktéž použít i datový typ \textbf{char}. Zde je příklad při použití u větvení programovacího jazyka C pomocí switche.
+
+\lstinputlisting[language=C]{switch0.c}
+\lstinputlisting[language=C]{switch1.c}
+
+V prvním příkladě můžeme vidět switch použitý s celočíselnou podmínkou. Naopak u druhého příkladu můžeme vidět použití se znaky, jenže u těchto znaků taktéž vidíme, že používáme čísla. Tato čísla pocházejí z ASCII tabulky znaků.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{ASCII.png}
+    \caption{ASCII tabulka znaků}
+    \label{fig:asciiTable}
+\end{figure}
+
+Pokud si například deklarujeme číslo se stejnou hodnotou, jako je tomu v ASCII tabulce, pak při výpisu pomocí printf jsme schopni vypsat toto celé číslo jako znak a opravdu bude odpovídat tomu stejnému znaku, jako bychom chtěli použít u typu char.
+
+\subsection{Operátory}
+Rozpoznáváme také několik typů 
+
+\section{Opakování bran}
+
+\section{Obecná terminologie programování}
+\subsection{Funkce}
+
+
+\newpage
+
+\newpage
+\addcontentsline{toc}{section}{Reference}
+\printbibliography
+\nocite{*}
+
+\end{document}
